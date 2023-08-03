@@ -8,3 +8,12 @@ interface Teacher {
 }
 
 interface Directors extends Teacher {}
+
+interface printTeacherFunction {
+  firstName: string;
+  lastName: string;
+}
+
+function printTeacher(firstName: string, lastName: string) {
+  return `${firstName.slice(0, 1)}. ${lastName}`;
+}
