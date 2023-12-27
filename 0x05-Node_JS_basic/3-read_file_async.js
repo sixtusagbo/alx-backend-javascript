@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 const countStudents = (dbFilePath) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) =>
     fs.readFile(dbFilePath, 'utf8', (err, data) => {
       if (err) {
         reject();
@@ -38,8 +38,8 @@ const countStudents = (dbFilePath) => {
       }
 
       resolve();
-    });
-  });
+    }),
+  );
 };
 
 module.exports = countStudents;
