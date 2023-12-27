@@ -1,9 +1,9 @@
 #!/usr/bin/node
 const fs = require('fs');
 
-const countStudents = (dbName) => {
-  fs.readFile(dbName, 'utf8', (err, data) => {
-    if (err) throw Error('Cannot load the database');
+const countStudents = (dbFilePath) => {
+  fs.readFile(dbFilePath, 'utf8', (err, data) => {
+    if (err) throw new Error('Cannot load the database');
 
     // Split the data into array of lines
     const lines = data
