@@ -30,7 +30,7 @@ const countStudents = (dbName) => {
 
       const firstNames = students.join(', ');
       console.log(
-        `Number of students in FIELD: ${students.length}. List: ${firstNames}`
+        `Number of students in ${field}: ${students.length}. List: ${firstNames}`,
       );
     }
   });
