@@ -48,7 +48,8 @@ const app = http.createServer(async (req, res) => {
   if (req.url === '/' && req.method === 'GET') {
     res.end('Hello Holberton School!');
   } else if (req.url === '/students' && req.method === 'GET') {
-    const output = await countStudents('database.csv');
+    const dbName = process.argv[2];
+    const output = await countStudents(dbName);
 
     res.end(output);
   }
