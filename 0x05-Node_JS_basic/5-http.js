@@ -5,11 +5,13 @@ const hostname = 'localhost';
 const port = 1245;
 
 const countStudents = (dbFilePath) => new Promise((resolve, reject) => fs.readFile(dbFilePath, 'utf8', (err, data) => {
-  if (err) {
-    reject();
-    throw new Error('Error: Cannot load the database');
-  }
   let result = 'This is the list of our students\n';
+
+  if (err) {
+    result += 'Cannot load the database';
+
+    return reject(new Error(result));
+  }
 
   // Split the data into array of lines
   const lines = data
@@ -38,7 +40,7 @@ const countStudents = (dbFilePath) => new Promise((resolve, reject) => fs.readFi
     result += `Number of students in ${field}: ${students.length}. List: ${firstNames}\n`;
   }
 
-  resolve(result);
+  return resolve(result);
 }));
 
 const app = http.createServer(async (req, res) => {
@@ -49,9 +51,13 @@ const app = http.createServer(async (req, res) => {
     res.end('Hello Holberton School!');
   } else if (req.url === '/students' && req.method === 'GET') {
     const dbName = process.argv[2];
-    const output = await countStudents(dbName);
+    try {
+      const output = await countStudents(dbName);
 
-    res.end(output);
+      res.end(output);
+    } catch (err) {
+      res.end(err.message);
+    }
   }
 });
 
