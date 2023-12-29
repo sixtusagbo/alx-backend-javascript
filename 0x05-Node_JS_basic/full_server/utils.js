@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 const readDatabase = async (filePath) => new Promise((resolve, reject) => fs.readFile(filePath, 'utf8', (err, data) => {
   if (err) {
@@ -35,4 +35,4 @@ const readDatabase = async (filePath) => new Promise((resolve, reject) => fs.rea
   return resolve(result);
 }));
 
-module.exports = readDatabase;
+export default readDatabase;
