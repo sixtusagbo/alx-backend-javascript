@@ -1,9 +1,11 @@
-const fs = require('fs');
+import fs from 'fs';
 
-const countStudents = (dbFilePath) => new Promise((resolve, reject) => fs.readFile(dbFilePath, 'utf8', (err, data) => {
+const readDatabase = async (filePath) => new Promise((resolve, reject) => fs.readFile(filePath, 'utf8', (err, data) => {
   if (err) {
     return reject(new Error('Cannot load the database'));
   }
+
+  const result = {};
 
   // Split the data into array of lines
   const lines = data
@@ -14,7 +16,6 @@ const countStudents = (dbFilePath) => new Promise((resolve, reject) => fs.readFi
   // Covert each line into array of values
   const rows = lines.slice(1).map((line) => line.split(','));
 
-  console.log(`Number of students: ${rows.length}`);
   const fieldIndex = 3;
   const firstNameIndex = 0;
   const fieldValues = rows.map((row) => row[fieldIndex]);
@@ -28,13 +29,10 @@ const countStudents = (dbFilePath) => new Promise((resolve, reject) => fs.readFi
       }
     }
 
-    const firstNames = students.join(', ');
-    console.log(
-      `Number of students in ${field}: ${students.length}. List: ${firstNames}`,
-    );
+    result[field] = students;
   }
 
-  return resolve();
+  return resolve(result);
 }));
 
-module.exports = countStudents;
+export default readDatabase;
