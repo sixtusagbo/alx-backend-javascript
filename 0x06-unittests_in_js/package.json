@@ -1,0 +1,13 @@
+{
+  "name": "0x06-unittests_in_js",
+  "version": "1.0.0",
+  "description": "ALX Unit tests in JS",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Sixtus Agbo",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^10.2.0"
+  }
+}
