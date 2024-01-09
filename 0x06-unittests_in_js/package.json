@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "ALX Unit tests in JS",
   "scripts": {
-    "test": "mocha"
+    "test": "./node_modules/mocha/bin/mocha"
   },
   "author": "Sixtus Agbo",
   "license": "MIT",
