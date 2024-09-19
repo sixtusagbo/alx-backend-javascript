@@ -9,7 +9,7 @@ const countStudents = (path) => {
     const lines = data
       .split('\n')
       .map((line) => line.trim())
-      .filter((line) => line !== '');
+      .filter((line) => line);
 
     // Convert each line into array of values
     const rows = lines.slice(1).map((line) => line.split(','));
