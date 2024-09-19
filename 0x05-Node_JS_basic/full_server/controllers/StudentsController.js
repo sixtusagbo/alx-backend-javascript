@@ -2,7 +2,7 @@
 import readDatabase from '../utils';
 
 class StudentsController {
-  static async getAllStudents(req, res) {
+  static async getAllStudents(request, response) {
     const dbName = process.argv[2];
     readDatabase(dbName).then((studentsPerFields) => {
       let result = 'This is the list of our students\n';
@@ -12,15 +12,15 @@ class StudentsController {
         const students = studentsPerFields[field].join(', ');
         result += `Number of students in ${field}: ${numOfStudents}. List: ${students}\n`;
       }
-      res.status(200).send(result);
-    }).catch(() => res.status(500).send('Cannot load the database'));
+      response.status(200).send(result);
+    }).catch(() => response.status(500).send('Cannot load the database'));
   }
 
-  static async getAllStudentsByMajor(req, res) {
-    const { major } = req.params;
+  static async getAllStudentsByMajor(request, response) {
+    const { major } = request.params;
 
     if (major !== 'CS' && major !== 'SWE') {
-      res.status(500).send('Major parameter must be CS or SWE');
+      response.status(500).send('Major parameter must be CS or SWE');
     }
 
     try {
@@ -28,9 +28,9 @@ class StudentsController {
       const studentsPerFields = await readDatabase(db);
 
       const students = studentsPerFields[major].join(', ');
-      res.send(`List: ${students}`);
+      response.send(`List: ${students}`);
     } catch (error) {
-      res.status(500).send('Cannot load the database');
+      response.status(500).send('Cannot load the database');
     }
   }
 }
