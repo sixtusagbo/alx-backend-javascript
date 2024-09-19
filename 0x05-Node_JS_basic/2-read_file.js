@@ -29,7 +29,7 @@ const countStudents = (path) => {
         }
       }
 
-      const firstNames = students.join(',');
+      const firstNames = students.join(', ');
       let msg = `Number of students in ${field}: ${students.length}. `;
       msg += `List: ${firstNames}`;
       console.log(msg);
