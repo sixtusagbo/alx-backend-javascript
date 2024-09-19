@@ -1,14 +1,18 @@
 const http = require('http');
+const fs = require('fs');
 
 const hostname = 'localhost';
 const port = 1245;
 
 const countStudents = (path) => new Promise((resolve, reject) => fs.readFile(path, 'utf-8', (err, data) => {
+  let result = 'This is the list of our students\n';
+
   if (err) {
-    return reject(new Error('Cannot load the database'));
+    result += 'Cannot load the database';
+    return reject(new Error(result));
   }
 
-  // Split data into array of lines
+  // Split the data into array of lines
   const lines = data
     .split('\n')
     .map((line) => line.trim())
@@ -18,7 +22,7 @@ const countStudents = (path) => new Promise((resolve, reject) => fs.readFile(pat
   const rows = lines.slice(1).map((line) => line.split(','));
 
   // Work with the database
-  console.log(`Number of students: ${rows.length}`);
+  result += `Number of students: ${rows.length}\n`;
   const fieldIndex = 3;
   const firstNameIndex = 0;
   const fieldValues = rows.map((row) => row[fieldIndex]);
@@ -33,12 +37,10 @@ const countStudents = (path) => new Promise((resolve, reject) => fs.readFile(pat
     }
 
     const firstNames = students.join(', ');
-    let msg = `Number of students in ${field}: ${students.length}. `;
-    msg += `List: ${firstNames}`;
-    console.log(msg);
+    result += `Number of students in ${field}: ${students.length}. List: ${firstNames}\n`;
   }
 
-  return resolve();
+  return resolve(result);
 }));
 
 const app = http.createServer(async (req, res) => {
@@ -50,7 +52,9 @@ const app = http.createServer(async (req, res) => {
   } else if (req.url === '/students' && req.method === 'GET') {
     const dbName = process.argv[2];
     try {
-      res.end(await countStudents(dbName));
+      const output = await countStudents(dbName);
+
+      res.end(output);
     } catch (error) {
       res.end(error.message);
     }
