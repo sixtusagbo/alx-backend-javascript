@@ -1,7 +1,8 @@
-const { expect } = require('chai');
+const chai = require('chai');
+const expect = chai.expect;
 const calculateNumber = require('./1-calcul.js');
 
-describe('#calculateNumber for SUM', function () {
+describe('#calculateNumber for type=SUM', function () {
   it('should return the correct sum of 2 integers', function () {
     expect(calculateNumber('SUM', 1, 3)).to.equal(4);
   });
@@ -26,7 +27,7 @@ describe('#calculateNumber for SUM', function () {
   });
 });
 
-describe('#calculateNumber for SUBTRACT', function () {
+describe('#calculateNumber for type=SUBTRACT', function () {
   it('should return the correct difference of 2 integers', function () {
     expect(calculateNumber('SUBTRACT', 1, 3)).to.equal(-2);
   });
@@ -51,7 +52,7 @@ describe('#calculateNumber for SUBTRACT', function () {
   });
 });
 
-describe('#calculateNumber for DIVIDE', function () {
+describe('#calculateNumber for type=DIVIDE', function () {
   it('should return the correct quotient of 2 integers', function () {
     expect(calculateNumber('DIVIDE', 4, 2)).to.equal(2);
   });
