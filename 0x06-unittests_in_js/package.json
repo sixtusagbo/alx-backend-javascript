@@ -1,0 +1,13 @@
+{
+  "name": "unittests",
+  "version": "1.0.0",
+  "description": "ALX - Unit tests in JS",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  },
+  "author": "Sixtus Agbo, ALX Africa, Holberton School",
+  "license": "MIT",
+  "dependencies": {
+    "mocha": "^10.7.3"
+  }
+}
