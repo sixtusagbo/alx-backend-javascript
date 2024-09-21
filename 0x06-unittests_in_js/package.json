@@ -8,6 +8,7 @@
   "author": "Sixtus Agbo, ALX Africa, Holberton School",
   "license": "MIT",
   "dependencies": {
+    "chai": "^3.5.0",
     "mocha": "^10.7.3"
   }
 }
