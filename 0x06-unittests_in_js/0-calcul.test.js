@@ -32,5 +32,8 @@ describe('calculateNumber', function () {
   it('should return the correct sum of 2 strings', function () {
     assert.strictEqual(calculateNumber('1', '3'), 4);
   });
+  it('should return the correct sum when first number is rounded', function () {
+    assert.strictEqual(calculateNumber(1.2, 3), 4);
+  });
 });
 
